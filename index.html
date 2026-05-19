@@ -18,15 +18,17 @@
 
     body {
       min-height: 100vh;
+      min-height: 100svh;
       margin: 0;
       background: #ffffff;
       color: #101010;
-      overflow: hidden;
+      overflow-x: hidden;
     }
 
     .screen {
       display: grid;
       min-height: 100vh;
+      min-height: 100svh;
       place-items: center;
       padding: 32px;
       text-align: center;
@@ -41,11 +43,16 @@
 
     h1 {
       margin: 0;
-      font-size: clamp(2.25rem, 8vw, 5.5rem);
+      font-size: 5rem;
       line-height: 1.05;
       font-weight: 800;
       letter-spacing: 0;
       text-wrap: balance;
+      overflow-wrap: anywhere;
+    }
+
+    .intro {
+      max-width: 13ch;
     }
 
     button {
@@ -81,7 +88,8 @@
 
     .final-message {
       margin: 0;
-      font-size: clamp(1.9rem, 6.4vw, 4.4rem);
+      width: min(100%, 18ch);
+      font-size: 4rem;
       line-height: 1.08;
     }
 
@@ -104,6 +112,10 @@
       background: #030303;
     }
 
+    body.scared {
+      overflow: hidden;
+    }
+
     body.scared .screen {
       display: none;
     }
@@ -113,10 +125,11 @@
     }
 
     .scare-image {
-      width: min(145vmin, 1300px);
-      max-width: none;
-      max-height: 145vh;
-      object-fit: contain;
+      width: 100vw;
+      height: 100vh;
+      height: 100dvh;
+      object-fit: cover;
+      object-position: center;
       filter: contrast(1.25) saturate(1.15);
       transform-origin: center;
     }
@@ -143,33 +156,43 @@
     @keyframes jump-in {
       0% {
         opacity: 0;
-        transform: scale(0.02) rotate(-7deg);
+        transform: scale(0.12) rotate(-7deg);
       }
 
       42% {
         opacity: 1;
-        transform: scale(1.55) rotate(4deg);
+        transform: scale(1.24) rotate(4deg);
       }
 
       62% {
-        transform: scale(1.22) rotate(-2deg);
+        transform: scale(1.08) rotate(-2deg);
       }
 
       100% {
         opacity: 1;
-        transform: scale(1.38) rotate(0deg);
+        transform: scale(1.12) rotate(0deg);
       }
     }
 
     @keyframes scare-shake {
-      0% { transform: translate(-12px, 8px) scale(1.38); }
-      50% { transform: translate(14px, -9px) scale(1.42); }
-      100% { transform: translate(-8px, -12px) scale(1.4); }
+      0% { transform: translate(-12px, 8px) scale(1.12); }
+      50% { transform: translate(14px, -9px) scale(1.16); }
+      100% { transform: translate(-8px, -12px) scale(1.14); }
     }
 
-    @media (max-width: 520px) {
+    @media (max-width: 900px) {
+      h1 {
+        font-size: 3.6rem;
+      }
+
+      .final-message {
+        font-size: 3rem;
+      }
+    }
+
+    @media (max-width: 640px) {
       .screen {
-        padding: 22px;
+        padding: 24px 18px;
       }
 
       .content {
@@ -180,12 +203,68 @@
         gap: 20px;
       }
 
+      h1 {
+        font-size: 2.5rem;
+        line-height: 1.08;
+      }
+
       .final-message {
-        font-size: clamp(1.55rem, 8.5vw, 2.9rem);
+        width: min(100%, 12ch);
+        font-size: 1.75rem;
+        line-height: 1.12;
       }
 
       button {
-        width: min(100%, 220px);
+        width: min(100%, 240px);
+        min-height: 52px;
+      }
+
+      .image-credit {
+        left: 8px;
+        right: 8px;
+        bottom: 6px;
+        font-size: 0.62rem;
+        text-align: right;
+      }
+    }
+
+    @media (max-width: 380px) {
+      h1 {
+        font-size: 2.1rem;
+      }
+
+      .final-message {
+        width: min(100%, 11ch);
+        font-size: 1.45rem;
+      }
+
+      button {
+        min-height: 50px;
+      }
+    }
+
+    @media (max-height: 520px) {
+      .screen {
+        padding: 16px;
+      }
+
+      .content,
+      .final-view {
+        gap: 14px;
+      }
+
+      h1 {
+        font-size: 2rem;
+        line-height: 1.08;
+      }
+
+      .final-message {
+        font-size: 1.6rem;
+        line-height: 1.12;
+      }
+
+      button {
+        min-height: 46px;
       }
     }
   </style>
