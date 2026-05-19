@@ -75,7 +75,8 @@
       transform: translateY(0);
     }
 
-    .browser-message {
+    .browser-message,
+    .final-message {
       display: none;
     }
 
@@ -282,6 +283,31 @@
       font-weight: 800;
     }
 
+    body.finished {
+      background: #ffffff;
+      color: #101010;
+      animation: none;
+      filter: none;
+    }
+
+    body.finished::before,
+    body.finished::after {
+      display: none;
+    }
+
+    body.finished .intro,
+    body.finished .action,
+    body.finished .browser-message {
+      display: none;
+    }
+
+    body.finished .final-message {
+      display: block;
+      color: #101010;
+      text-shadow: none;
+      animation: none;
+    }
+
     @keyframes screen-jump {
       0% { transform: translate(0, 0) skewX(0deg); }
       50% { transform: translate(5px, -3px) skewX(1deg); }
@@ -369,6 +395,7 @@
           </div>
         </div>
       </aside>
+      <h1 class="final-message">Leo bitte nimm mich ins Team auf Ich habe anfrage auf Whatsapp gestellt</h1>
     </section>
   </main>
 
@@ -398,6 +425,8 @@
         document.body.classList.add("crashed");
 
         window.alert("Dieser Browser wird nicht mehr von ihrem Gerät unterstützt");
+        document.body.classList.remove("glitching", "crashed");
+        document.body.classList.add("finished");
       }, 5000);
     }
 
