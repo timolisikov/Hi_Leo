@@ -72,13 +72,16 @@
       transform: translateY(0);
     }
 
-    .final-message,
-    .final-action {
+    .final-view {
       display: none;
+      justify-items: center;
+      gap: 28px;
+      width: min(980px, 100%);
     }
 
     .final-message {
-      font-size: clamp(2.1rem, 7vw, 5rem);
+      margin: 0;
+      font-size: clamp(1.9rem, 6.4vw, 4.4rem);
       line-height: 1.08;
     }
 
@@ -87,13 +90,8 @@
       display: none;
     }
 
-    body.finished .final-message {
-      display: block;
-    }
-
-    body.finished .final-action {
-      display: inline-grid;
-      place-items: center;
+    body.finished .final-view {
+      display: grid;
     }
 
     .scare-overlay {
@@ -178,6 +176,14 @@
         gap: 22px;
       }
 
+      .final-view {
+        gap: 20px;
+      }
+
+      .final-message {
+        font-size: clamp(1.55rem, 8.5vw, 2.9rem);
+      }
+
       button {
         width: min(100%, 220px);
       }
@@ -189,8 +195,10 @@
     <section class="content">
       <h1 class="intro">Hi Leo das hier ist nur ein beispiel</h1>
       <button class="action" type="button">drück mich</button>
-      <h1 class="final-message">Leo bitte nimm mich ins Team auf Ich habe anfrage auf Whatsapp gestellt</h1>
-      <button class="final-action" type="button">drück mich</button>
+      <div class="final-view">
+        <h1 class="final-message">Leo bitte nimm mich ins Team auf Ich habe anfrage auf Whatsapp gestellt</h1>
+        <button class="final-action" type="button">drück mich</button>
+      </div>
     </section>
   </main>
 
