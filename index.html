@@ -290,6 +290,10 @@
       filter: none;
     }
 
+    body.finished .screen {
+      background: #ffffff;
+    }
+
     body.finished::before,
     body.finished::after {
       display: none;
@@ -303,7 +307,12 @@
 
     body.finished .final-message {
       display: block;
+      position: relative;
+      z-index: 3;
+      width: min(980px, 100%);
       color: #101010;
+      font-size: clamp(2.1rem, 7vw, 5rem);
+      line-height: 1.08;
       text-shadow: none;
       animation: none;
     }
@@ -427,10 +436,13 @@
       window.setTimeout(() => {
         window.clearInterval(countdownTimer);
         countdown.textContent = "0";
-        document.body.classList.add("crashed");
 
         showFinalMessage();
-        window.alert("Dieser Browser wird nicht mehr von ihrem Gerät unterstützt");
+
+        window.setTimeout(() => {
+          window.alert("Dieser Browser wird nicht mehr von ihrem Gerät unterstützt");
+          showFinalMessage();
+        }, 250);
       }, 5000);
     }
 
