@@ -19,27 +19,23 @@
     body {
       min-height: 100vh;
       margin: 0;
-      overflow: hidden;
       background: #ffffff;
       color: #101010;
-      transition: background 200ms ease, color 200ms ease;
     }
 
     .screen {
-      position: relative;
       display: grid;
       min-height: 100vh;
       place-items: center;
       padding: 32px;
       text-align: center;
-      isolation: isolate;
     }
 
     .content {
       display: grid;
       justify-items: center;
       gap: 28px;
-      width: min(860px, 100%);
+      width: min(980px, 100%);
     }
 
     h1 {
@@ -75,294 +71,19 @@
       transform: translateY(0);
     }
 
-    .browser-message,
     .final-message {
       display: none;
-    }
-
-    body.glitching {
-      color: #f8f8f8;
-      background:
-        repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.08) 0 1px, transparent 1px 4px),
-        linear-gradient(90deg, #050505, #19001e 34%, #001f22 66%, #070707);
-      animation: screen-jump 190ms infinite steps(2), color-pulse 760ms infinite steps(2);
-    }
-
-    body.glitching::before,
-    body.glitching::after {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-      content: "";
-    }
-
-    body.glitching::before {
-      background:
-        repeating-linear-gradient(90deg, rgba(255, 0, 72, 0.18) 0 3px, transparent 3px 18px),
-        repeating-linear-gradient(0deg, transparent 0 14px, rgba(0, 255, 255, 0.16) 14px 16px);
-      mix-blend-mode: screen;
-      animation: static-slide 360ms infinite linear;
-    }
-
-    body.glitching::after {
-      background:
-        radial-gradient(circle at 20% 30%, rgba(255, 0, 72, 0.28), transparent 18%),
-        radial-gradient(circle at 82% 70%, rgba(0, 255, 255, 0.2), transparent 22%);
-      opacity: 0.7;
-      animation: flicker 130ms infinite steps(2);
-    }
-
-    body.glitching .intro,
-    body.glitching .action {
-      display: none;
-    }
-
-    body.glitching .browser-message {
-      position: relative;
-      z-index: 2;
-      display: grid;
-      width: min(590px, 100%);
-      border: 1px solid rgba(210, 214, 220, 0.95);
-      border-radius: 8px;
-      padding: 0;
-      overflow: hidden;
-      background: #ffffff;
-      color: #202124;
-      box-shadow:
-        0 18px 54px rgba(0, 0, 0, 0.38),
-        0 0 0 1px rgba(255, 255, 255, 0.5);
-      text-align: left;
-      animation: message-glitch 620ms infinite steps(2);
-    }
-
-    .message-bar {
-      display: grid;
-      grid-template-columns: 18px 1fr auto;
-      align-items: center;
-      gap: 10px;
-      min-height: 48px;
-      border-bottom: 1px solid #e2e5ea;
-      padding: 0 18px;
-      background: #f7f8fa;
-      font-size: 0.95rem;
-      font-weight: 700;
-    }
-
-    .message-icon {
-      display: inline-grid;
-      width: 18px;
-      height: 18px;
-      place-items: center;
-      border-radius: 50%;
-      background: #1a73e8;
-      color: #ffffff;
-      font-size: 0.78rem;
-      font-weight: 800;
-      line-height: 1;
-    }
-
-    .message-close {
-      display: inline-grid;
-      width: 26px;
-      height: 26px;
-      place-items: center;
-      border-radius: 50%;
-      color: #5f6368;
-      font-size: 1.2rem;
-      font-weight: 400;
-    }
-
-    .message-body {
-      display: grid;
-      gap: 14px;
-      padding: 22px 24px 24px;
-    }
-
-    .message-origin {
-      margin: 0;
-      color: #5f6368;
-      font-size: 0.88rem;
-      line-height: 1.4;
-    }
-
-    body.glitching .browser-message h1 {
-      position: relative;
-      margin: 0;
-      color: #202124;
-      font-size: clamp(1.35rem, 5vw, 2.25rem);
-      line-height: 1.12;
-      text-shadow:
-        2px 0 rgba(255, 0, 72, 0.25),
-        -2px 0 rgba(0, 255, 255, 0.25);
-      animation: text-glitch 420ms infinite steps(2);
-    }
-
-    body.glitching .browser-message h1::before,
-    body.glitching .browser-message h1::after {
-      position: absolute;
-      inset: 0;
-      overflow: hidden;
-      color: #202124;
-      content: attr(data-text);
-      clip-path: inset(0 0 54% 0);
-      pointer-events: none;
-    }
-
-    body.glitching .browser-message h1::before {
-      transform: translate(-5px, -2px);
-      color: #ff0048;
-      mix-blend-mode: screen;
-    }
-
-    body.glitching .browser-message h1::after {
-      clip-path: inset(48% 0 0 0);
-      transform: translate(5px, 3px);
-      color: #00ffff;
-      mix-blend-mode: screen;
-    }
-
-    .message-copy {
-      margin: 0;
-      color: #3c4043;
-      font-size: clamp(1rem, 3.8vw, 1.2rem);
-      line-height: 1.35;
-    }
-
-    .countdown {
-      display: inline-grid;
-      min-width: 1.4em;
-      min-height: 1.4em;
-      place-items: center;
-      border-radius: 4px;
-      background: #fce8e6;
-      color: #c5221f;
-      font-weight: 800;
-      font-variant-numeric: tabular-nums;
-    }
-
-    .message-actions {
-      display: flex;
-      justify-content: flex-end;
-      padding-top: 4px;
-    }
-
-    .message-actions span {
-      display: inline-grid;
-      min-width: 86px;
-      min-height: 36px;
-      place-items: center;
-      border-radius: 4px;
-      background: #1a73e8;
-      color: #ffffff;
-      font-size: 0.92rem;
-      font-weight: 700;
-    }
-
-    body.crashed {
-      background:
-        repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.16) 0 2px, transparent 2px 5px),
-        repeating-linear-gradient(90deg, #000000 0 12px, #24000b 12px 18px, #001d20 18px 24px);
-      animation: crash-shake 80ms infinite steps(2), color-pulse 180ms infinite steps(2);
-    }
-
-    body.crashed .browser-message {
-      transform: scale(1.02) rotate(-0.5deg);
-      border-color: rgba(255, 0, 72, 0.8);
-      animation: crash-card 130ms infinite steps(2);
-    }
-
-    body.crashed .message-bar {
-      background: #fce8e6;
-      border-bottom-color: #ff0048;
-      color: #a50e0e;
-    }
-
-    body.crashed .message-copy {
-      color: #a50e0e;
-      font-weight: 800;
-    }
-
-    body.finished {
-      background: #ffffff;
-      color: #101010;
-      animation: none;
-      filter: none;
-    }
-
-    body.finished .screen {
-      background: #ffffff;
-    }
-
-    body.finished::before,
-    body.finished::after {
-      display: none;
+      font-size: clamp(2.1rem, 7vw, 5rem);
+      line-height: 1.08;
     }
 
     body.finished .intro,
-    body.finished .action,
-    body.finished .browser-message {
+    body.finished .action {
       display: none;
     }
 
     body.finished .final-message {
       display: block;
-      position: relative;
-      z-index: 3;
-      width: min(980px, 100%);
-      color: #101010;
-      font-size: clamp(2.1rem, 7vw, 5rem);
-      line-height: 1.08;
-      text-shadow: none;
-      animation: none;
-    }
-
-    @keyframes screen-jump {
-      0% { transform: translate(0, 0) skewX(0deg); }
-      50% { transform: translate(5px, -3px) skewX(1deg); }
-      100% { transform: translate(-4px, 2px) skewX(-1deg); }
-    }
-
-    @keyframes static-slide {
-      from { transform: translateX(-18px); }
-      to { transform: translateX(18px); }
-    }
-
-    @keyframes flicker {
-      0%, 100% { opacity: 0.25; }
-      50% { opacity: 0.95; }
-    }
-
-    @keyframes text-glitch {
-      0% { transform: translate(0, 0); }
-      25% { transform: translate(-6px, 2px); }
-      50% { transform: translate(5px, -4px); }
-      75% { transform: translate(-2px, 4px); }
-      100% { transform: translate(3px, -1px); }
-    }
-
-    @keyframes message-glitch {
-      0% { transform: translate(0, 0); }
-      50% { transform: translate(3px, -2px); }
-      100% { transform: translate(-2px, 2px); }
-    }
-
-    @keyframes color-pulse {
-      0% { filter: contrast(1.3) saturate(1.4); }
-      50% { filter: contrast(2.3) saturate(2.1) hue-rotate(16deg); }
-      100% { filter: contrast(1.7) saturate(2.8) hue-rotate(-12deg); }
-    }
-
-    @keyframes crash-shake {
-      0% { transform: translate(-8px, 5px) skewX(2deg); }
-      50% { transform: translate(8px, -5px) skewX(-2deg); }
-      100% { transform: translate(-4px, -8px) skewY(1deg); }
-    }
-
-    @keyframes crash-card {
-      0% { transform: translate(-8px, 6px) scale(1.02) rotate(-0.5deg); }
-      50% { transform: translate(7px, -5px) scale(1.03) rotate(0.5deg); }
-      100% { transform: translate(-4px, -7px) scale(1.01) rotate(-1deg); }
     }
 
     @media (max-width: 520px) {
@@ -385,69 +106,15 @@
     <section class="content">
       <h1 class="intro">Hi Leo das hier ist nur ein beispiel</h1>
       <button class="action" type="button">drück mich</button>
-      <aside class="browser-message" role="alert" aria-labelledby="browser-message-title">
-        <div class="message-bar">
-          <span class="message-icon" aria-hidden="true">!</span>
-          <span>Browser-Meldung</span>
-          <span class="message-close" aria-hidden="true">x</span>
-        </div>
-        <div class="message-body">
-          <p class="message-origin">browser://support</p>
-          <h1 id="browser-message-title" data-text="Dieser Browser wird nicht mehr von ihrem Gerät unterstützt">
-            Dieser Browser wird nicht mehr von ihrem Gerät unterstützt
-          </h1>
-          <p class="message-copy">
-            dieser browser wird in <span class="countdown">5</span> sekunden deinstalliert
-          </p>
-          <div class="message-actions" aria-hidden="true">
-            <span>OK</span>
-          </div>
-        </div>
-      </aside>
       <h1 class="final-message">Leo bitte nimm mich ins Team auf Ich habe anfrage auf Whatsapp gestellt</h1>
     </section>
   </main>
 
   <script>
     const button = document.querySelector(".action");
-    const countdown = document.querySelector(".countdown");
-
-    function showFinalMessage() {
-      document.body.classList.remove("glitching", "crashed");
-      document.body.classList.add("finished");
-    }
-
-    function startPrankSequence() {
-      let secondsLeft = 5;
-
-      document.body.classList.add("glitching");
-      button.disabled = true;
-      countdown.textContent = secondsLeft;
-
-      const countdownTimer = window.setInterval(() => {
-        secondsLeft -= 1;
-        countdown.textContent = Math.max(secondsLeft, 0);
-
-        if (secondsLeft <= 0) {
-          window.clearInterval(countdownTimer);
-        }
-      }, 1000);
-
-      window.setTimeout(() => {
-        window.clearInterval(countdownTimer);
-        countdown.textContent = "0";
-
-        showFinalMessage();
-
-        window.setTimeout(() => {
-          window.alert("Dieser Browser wird nicht mehr von ihrem Gerät unterstützt");
-          showFinalMessage();
-        }, 250);
-      }, 5000);
-    }
 
     button.addEventListener("click", () => {
-      startPrankSequence();
+      document.body.classList.add("finished");
     });
   </script>
 </body>
