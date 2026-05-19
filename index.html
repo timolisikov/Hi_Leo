@@ -21,6 +21,7 @@
       margin: 0;
       background: #ffffff;
       color: #101010;
+      overflow: hidden;
     }
 
     .screen {
@@ -71,8 +72,12 @@
       transform: translateY(0);
     }
 
-    .final-message {
+    .final-message,
+    .final-action {
       display: none;
+    }
+
+    .final-message {
       font-size: clamp(2.1rem, 7vw, 5rem);
       line-height: 1.08;
     }
@@ -84,6 +89,84 @@
 
     body.finished .final-message {
       display: block;
+    }
+
+    body.finished .final-action {
+      display: inline-grid;
+      place-items: center;
+    }
+
+    .scare-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 10;
+      display: none;
+      place-items: center;
+      overflow: hidden;
+      background: #030303;
+    }
+
+    body.scared .screen {
+      display: none;
+    }
+
+    body.scared .scare-overlay {
+      display: grid;
+    }
+
+    .scare-image {
+      width: min(125vmin, 1200px);
+      max-width: none;
+      max-height: 130vh;
+      object-fit: contain;
+      filter: contrast(1.25) saturate(1.15);
+      transform-origin: center;
+    }
+
+    body.scared .scare-image {
+      animation: jump-in 850ms cubic-bezier(0.05, 0.95, 0.12, 1) forwards,
+        scare-shake 65ms 850ms 12 steps(2);
+    }
+
+    .image-credit {
+      position: fixed;
+      right: 10px;
+      bottom: 8px;
+      z-index: 11;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.72rem;
+      text-decoration: none;
+    }
+
+    .image-credit:hover {
+      color: #ffffff;
+    }
+
+    @keyframes jump-in {
+      0% {
+        opacity: 0;
+        transform: scale(0.02) rotate(-7deg);
+      }
+
+      42% {
+        opacity: 1;
+        transform: scale(1.55) rotate(4deg);
+      }
+
+      62% {
+        transform: scale(1.22) rotate(-2deg);
+      }
+
+      100% {
+        opacity: 1;
+        transform: scale(1.38) rotate(0deg);
+      }
+    }
+
+    @keyframes scare-shake {
+      0% { transform: translate(-12px, 8px) scale(1.38); }
+      50% { transform: translate(14px, -9px) scale(1.42); }
+      100% { transform: translate(-8px, -12px) scale(1.4); }
     }
 
     @media (max-width: 520px) {
@@ -107,14 +190,33 @@
       <h1 class="intro">Hi Leo das hier ist nur ein beispiel</h1>
       <button class="action" type="button">drück mich</button>
       <h1 class="final-message">Leo bitte nimm mich ins Team auf Ich habe anfrage auf Whatsapp gestellt</h1>
+      <button class="final-action" type="button">drück mich</button>
     </section>
   </main>
 
+  <aside class="scare-overlay" aria-hidden="true">
+    <img
+      class="scare-image"
+      src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Pennywise_1990_Cosplay.jpg/960px-Pennywise_1990_Cosplay.jpg"
+      alt=""
+    >
+    <a
+      class="image-credit"
+      href="https://commons.wikimedia.org/wiki/File:Pennywise_1990_Cosplay.jpg"
+      rel="noopener"
+    >Bild: Chanh Tang / Media Gamut, CC BY 2.0</a>
+  </aside>
+
   <script>
     const button = document.querySelector(".action");
+    const finalButton = document.querySelector(".final-action");
 
     button.addEventListener("click", () => {
       document.body.classList.add("finished");
+    });
+
+    finalButton.addEventListener("click", () => {
+      document.body.classList.add("scared");
     });
   </script>
 </body>
