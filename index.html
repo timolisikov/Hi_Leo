@@ -403,6 +403,11 @@
     const button = document.querySelector(".action");
     const countdown = document.querySelector(".countdown");
 
+    function showFinalMessage() {
+      document.body.classList.remove("glitching", "crashed");
+      document.body.classList.add("finished");
+    }
+
     function startPrankSequence() {
       let secondsLeft = 5;
 
@@ -424,9 +429,8 @@
         countdown.textContent = "0";
         document.body.classList.add("crashed");
 
+        showFinalMessage();
         window.alert("Dieser Browser wird nicht mehr von ihrem Gerät unterstützt");
-        document.body.classList.remove("glitching", "crashed");
-        document.body.classList.add("finished");
       }, 5000);
     }
 
